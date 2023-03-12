@@ -1,6 +1,49 @@
 <html>
-<head></head>
+
+<head>
+    <title>Very Basic Bingo Randomizer</title>
+    <script>
+        function shuffle(a) {
+            // Taken from https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+            var j, x, i;
+            for (i = a.length - 1; i > 0; i--) {
+                j = Math.floor(Math.random() * (i + 1));
+                x = a[i];
+                a[i] = a[j];
+                a[j] = x;
+            }
+            return a;
+        }
+
+        function generateBingo() {
+            var a = [];
+            var l = ["B", "I", "N", "G", "O"];
+
+            for (var i = 0; i < 5; i++) {
+                for (var j = 1; j <= 90; j++) {
+                    a.push(l[i] + j);
+                }
+            }
+            return a;
+        }
+
+        function randomizeBingo() {
+            return shuffle(generateBingo()).join(" \n");
+        }
+
+        function fillUpText() {
+            var txt = document.getElementById("text");
+            txt.innerText = randomizeBingo();
+        }
+    </script>
+</head>
+
 <body>
-  <h1>Test</h1>
+    <h1>Quick and Dirty Bingo Randomizer</h1>
+    <hr />
+    <button onclick="fillUpText()">Generate!</button>
+    <br>
+    <textarea id="text"></textarea>
 </body>
+
 </html>
